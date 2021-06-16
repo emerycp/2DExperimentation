@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/TESTCOIN1.png" type="Texture" id=1]
+[ext_resource path="res://FiraCode-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.44545
+margin_top = 3.63652
+margin_right = 0.445435
+margin_bottom = 3.63654
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 10.0
+margin_top = -5.0
+margin_right = 42.0
+margin_bottom = 27.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreText" type="Label" parent="."]
+margin_left = 57.8733
+margin_top = 3.63652
+margin_right = 97.8733
+margin_bottom = 52.6365
+custom_fonts/font = SubResource( 1 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
