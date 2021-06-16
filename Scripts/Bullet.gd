@@ -23,11 +23,13 @@ func _physics_process(delta):
 	position.y += spread * delta
 
 func _on_Bullet_body_entered(pBody):
-	if(pBody.visible and pBody.name.begins_with("Enemy")):
-		pBody.hitpoint -= bulletDamage
-		pBody.showHitpoints()
+	if pBody.visible:
+		if pBody.name.begins_with("Enemy"):
+			pBody.hitpoint -= bulletDamage
+			pBody.showHitpoints()
+		queue_free()
 		
-	queue_free()
+	
 
 
 	

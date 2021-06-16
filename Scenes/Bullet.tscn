@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/TESTDANGER.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 9.12391
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 16
