@@ -6,28 +6,24 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
 
-[node name="KinematicBody2D" type="RigidBody2D"]
+[node name="Crates" type="RigidBody2D"]
 collision_layer = 23
 collision_mask = 16
-mode = 1
-gravity_scale = 0.5
+can_sleep = false
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Crates" type="Sprite" parent="Area2D"]
 texture = ExtResource( 1 )
-centered = false
 
 [node name="CollisionArea2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 16, 16 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 16 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area_entered"]
