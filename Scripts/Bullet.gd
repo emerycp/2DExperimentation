@@ -8,18 +8,11 @@ var bulletDamage: int = 1
 func _ready():
 	spread = (randf() -0.5) * 100
 
-func _process(delta):
-	if goingLeft:
-		rotation_degrees -= 350 * delta
-	else:
-		rotation_degrees += 350 * delta
-
 func _physics_process(delta):
 	if goingLeft:
 		position.x -= bulletSpeed * delta
 	else:
 		position.x += bulletSpeed * delta
-	
 	position.y += spread * delta
 
 func _on_Bullet_body_entered(pBody):

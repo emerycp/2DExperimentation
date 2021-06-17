@@ -13,7 +13,7 @@ func _ready():
 #	vel = move_and_slide(vel, Vector2.UP)	vel = move_and_slidevel, Vector2.UP)
 
 func _on_Area_entered(pArea):
-	if(pArea.name == "Bullet"):
+	if(pArea.is_in_group("Bullet")):
 		pArea.queue_free()
 		destroy()
 

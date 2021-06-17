@@ -48,6 +48,8 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision:
 			emit_signal('collided', collision)
+		
+	$AnimatedSprite.flip_h = facingLeft
 
 	vel.y += get_parent().gravity * delta
 
@@ -74,7 +76,7 @@ func _physics_process(delta):
 		vel.x = sign(vel.x) * speed
 
 	if is_on_floor() and vel.x != 0:
-		sprite.play("move")
+		# sprite.play("move")
 		isMoving = true
 
 	if is_on_floor() and vel.x == 0:
@@ -96,7 +98,7 @@ func collect_coin (value):
 
 func jump():
 	vel.y = jumpForce
-	sprite.play("jump")
+	# sprite.play("jump")
 
 func die ():
 	showPopup("Game over!")
