@@ -22,6 +22,6 @@
 
 ## World
 
-- [x] Crates, physics, destruction  *Need fixes, some doesn't get destroyed*
+- [x] Crates, physics, destruction  *Need reworks on physics with rigid body*
 - [ ] Power-ups spawn
 
