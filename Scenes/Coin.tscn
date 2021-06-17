@@ -3,12 +3,13 @@
 [ext_resource path="res://Sprites/TESTCOIN1.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Coin.gd" type="Script" id=3]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 7.7885
 
 [node name="Coin" type="Area2D" groups=[
 "Coins",
 ]]
+collision_layer = 8
 collision_mask = 2
 script = ExtResource( 3 )
 
@@ -20,6 +21,6 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 15.7595, 16.1568 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]

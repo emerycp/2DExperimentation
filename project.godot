@@ -58,8 +58,8 @@ move_down={
 2d_physics/layer_2="player"
 2d_render/layer_3="ennemy"
 2d_physics/layer_3="ennemy"
-2d_render/layer_4="coins"
-2d_physics/layer_4="coins"
+2d_render/layer_4="entity"
+2d_physics/layer_4="entity"
 2d_render/layer_5="throwable"
 2d_physics/layer_5="throwable"
 
