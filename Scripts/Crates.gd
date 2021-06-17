@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 onready var chipScene = load("res://Scenes/Chip.tscn")
 
@@ -8,9 +8,9 @@ var vel = Vector2()
 func _ready():
 	pass # Replace with function body.
 
-func _physics_process(delta):
-	vel.y += get_parent().gravity * delta
-	vel = move_and_slide(vel, Vector2.UP)
+#func _physics_process(delta):
+#	vel.y += get_parent().gravity * delta
+#	vel = move_and_slide(vel, Vector2.UP)	vel = move_and_slidevel, Vector2.UP)
 
 func _on_Area_entered(pArea):
 	if(pArea.name == "Bullet"):
