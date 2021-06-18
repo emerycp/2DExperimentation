@@ -4,19 +4,33 @@ onready var crates = preload("res://Scenes/Crates.tscn")
 onready var coins = preload("res://Scenes/Coin.tscn")
 
 func _ready():
+	var instance = null
+	
 	for	tile in get_used_cells():
-		if get_cellv(tile) == tile_set.find_tile_by_name("Crate"):
-			setObjectOnWorld(crates.instance(), tile, true)
-		elif get_cellv(tile) == tile_set.find_tile_by_name("Coin"):
-			setObjectOnWorld(coins.instance(), tile, false)
+		var offset = null
+		var currentTile = get_cellv(tile)
+		match(currentTile):
+			0: # Crate
+				instance = crates.instance()
+				offset = Vector2(16, 16)
+			2: # Coin
+				instance = coins.instance()
+			_: # Anything else
+				instance = null
+		setObjectOnWorld(instance, tile, offset)
 
 
-func setObjectOnWorld(pObjectInstance, pTile, pIsCrate):
+func setObjectOnWorld(pObjectInstance, pTile, pOffset):
+	
+	if pObjectInstance == null:
+		return
+		
 	var tilePosition = map_to_world(pTile)
 	var object = pObjectInstance
-	if pIsCrate:
-		tilePosition += Vector2(16, 16)
+	if pOffset != null: # Applies offset
+		tilePosition += pOffset
 	object.global_position = tilePosition
-	get_parent().call_deferred("add_child", object)
 	set_cellv(pTile, -1)
+	get_parent().call_deferred("add_child", object)
+	
 
