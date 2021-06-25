@@ -11,7 +11,12 @@ var vel: Vector2 = Vector2()
 var grounded: bool = false
 
 
-var isMoving: bool = false;
+var isMoving: bool = false
+
+var isAttacking: bool
+var armInstance = null
+var armPosition: Vector2 = Vector2()
+
 var facingLeft: bool = false
 var isSliding: bool = false;
 
@@ -23,26 +28,36 @@ signal collided(value)
 onready var sprite = $AnimatedSprite
 onready var ui = get_node("/root/Main/UI/UI")
 onready var bulletScene = load("res://Scenes/Bullet.tscn")
+onready var armScene = load("res://Scenes/ArmScene.tscn")
 onready var enemyScene = load("res://Scenes/Enemy.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	sprite.play("default")
+	armInstance = armScene.instance()
+	armPosition = armInstance.get_node("Position").global_position
+	get_parent().call_deferred("add_child", armInstance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	armInstance.position = position
+	
 	if !isSliding:
 		vel.x = 0
 
+	if Input.is_action_just_pressed("action_two"):
+		sprite.play("attack")
+		isAttacking = true
+		initBullet()
+		$AnimatedSprite/AttackTimer.start(0.3)
 	if Input.is_action_pressed("move_left"):
 		vel.x -= speed
 		facingLeft = true
 	if Input.is_action_pressed("move_right"):
 		vel.x += speed
 		facingLeft = false
-	if Input.is_action_just_pressed("action_two"):
-		initBullet()
+	
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
@@ -50,7 +65,12 @@ func _physics_process(delta):
 			emit_signal('collided', collision)
 		
 	$AnimatedSprite.flip_h = facingLeft
-
+	armInstance.get_node("Sprite").flip_h = facingLeft
+	if facingLeft:
+		armPosition = armInstance.get_node("PositionLeft").global_position
+	else:
+		armPosition = armInstance.get_node("Position").global_position
+	armInstance.visible = isAttacking
 	vel.y += get_parent().gravity * delta
 
 	if isSliding:
@@ -79,7 +99,7 @@ func _physics_process(delta):
 		# sprite.play("move")
 		isMoving = true
 
-	if is_on_floor() and vel.x == 0:
+	if is_on_floor() and vel.x == 0 and !isAttacking:
 		sprite.play("default")
 		isMoving = false
 
@@ -113,11 +133,13 @@ func _on_Main_isSliding(pIsOnTile):
 
 func initBullet():
 	var bullet = bulletScene.instance()
-
 	bullet.goingLeft = facingLeft
-	bullet.position.x = position.x
-	bullet.position.y = position.y
-
+	bullet.position = armPosition
 	get_parent().add_child(bullet)
+
+func _on_AttackTimer_timeout():
+	sprite.play("default")
+	isAttacking = false
+	armInstance.visible = false
 
 

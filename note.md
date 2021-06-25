@@ -19,7 +19,7 @@
 - [ ] Acceleration/deceleration
 - [ ] Show current power-up
 - [ ] Pick up different power-ups
-- [ ] Shoot bullet from the designed point. Spawn an arm when shooting.
+- [x] Shoot bullet from the designed point. Spawn an arm when shooting.
 - [ ] Run animation
 - [ ] Jump animation
 
@@ -40,5 +40,5 @@
 - [x] Coins / Counter
 - [ ] Power-ups spawn
 - [ ] Multiple decorations
-- [ ] Background
+- [ ] Parallax background
 
