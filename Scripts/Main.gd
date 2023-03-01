@@ -21,5 +21,5 @@ func _on_Player_collided(collision):
 
 		if tile == 0: # if sliding
 			emit_signal('isSliding', true)
-		else: 
+		else:
 			emit_signal('isSliding', false)
